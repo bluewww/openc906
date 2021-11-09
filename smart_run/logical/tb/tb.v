@@ -69,8 +69,8 @@ begin
   end
 end
 
-initial 
-begin 
+initial
+begin
   jclk = 0;
   forever begin
     #(`TCLK_PERIOD/2) jclk = ~jclk;
@@ -123,11 +123,11 @@ integer i;
       `RTL_MEM.ram14.mem[i][7:0] = 8'h0;
       `RTL_MEM.ram15.mem[i][7:0] = 8'h0;
     end
-  
+
     $display("\t********* Read program *********");
     $readmemh("inst.pat", mem_inst_temp);
     $readmemh("data.pat", mem_data_temp);
-  
+
     $display("\t********* Load program to memory *********");
     i=0;
     for(j=0;i<32'h4000;i=j/4)
@@ -194,7 +194,7 @@ begin
   $display("*   meeting max simulation time, stop!       *");
   $display("**********************************************");
   FILE = $fopen("run_case.report","a");
-  $fwrite(FILE,"TEST FAIL");   
+  $fwrite(FILE,"TEST FAIL");
 $finish;
 end
 
@@ -206,7 +206,7 @@ always @(posedge clk or negedge rst_b)
 begin
   if(!rst_b)
     cycle_count[31:0] <= 32'b1;
-  else 
+  else
     cycle_count[31:0] <= cycle_count[31:0] + 1'b1;
 end
 
@@ -224,7 +224,7 @@ begin
       $display("*************************************************************");
       #10;
       FILE = $fopen("run_case.report","a");
-      $fwrite(FILE,"TEST FAIL");   
+      $fwrite(FILE,"TEST FAIL");
 
       $finish;
     end
@@ -263,7 +263,7 @@ begin
    $display("**********************************************");
   #10;
    FILE = $fopen("run_case.report","a");
-   $fwrite(FILE,"TEST PASS");   
+   $fwrite(FILE,"TEST PASS");
    $fclose(FILE);
 
    $finish;
@@ -275,7 +275,7 @@ begin
    $display("**********************************************");
    #10;
    FILE = $fopen("run_case.report","a");
-   $fwrite(FILE,"TEST FAIL");   
+   $fwrite(FILE,"TEST FAIL");
    $fclose(FILE);
 
    $finish;
@@ -315,11 +315,11 @@ initial
 begin
 `ifdef NC_SIM
   $dumpfile("test.vcd");
-  $dumpvars;  
+  $dumpvars;
 `else
    `ifdef IVERILOG_SIM
      $dumpfile("test.vcd");
-     $dumpvars;  
+     $dumpvars;
    `else
      $display("######time:%d, Dump start######",$time);
      $fsdbDumpvars();

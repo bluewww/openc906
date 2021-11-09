@@ -3,18 +3,17 @@
   Welcome to C906! Some key directories are shown below.
 ```
 |--C906_RTL_FACRORY/
-  |--gen_rtl/     ##the source verilog code of C906 
+  |--gen_rtl/     ##the source verilog code of C906
   |--setup/       ##set the environment variables
 |--smart_run/     ##the RTL simulation environment
   |--impl/        ##sdc file
-  |--logical/     ##the SoC demo and test bench to run the simulation 
+  |--logical/     ##the SoC demo and test bench to run the simulation
   |--setup/       ##GNU tool chain setting
   |--tests/       ##include the test suit, linker file, boot code and so on
   |--work/        ##the working directory
   |--Makefile     ##the simulation script
 |--doc/           ##the user and integration manual of C906
 ```
-  
 
 ## Usage
 
@@ -39,11 +38,10 @@ setup file about how to specify it:
     ./smart_run/setup/example_setup.csh
 ```
 
- 
 ## Notes
-    
+
 ```
-The testbench supports iverilog, vcs and irun to run simulation and you can use Gtkwave or verdi 
+The testbench supports iverilog, vcs and irun to run simulation and you can use Gtkwave or verdi
 to open the waveform under ./smart_run/work/ directory.
 
 You can get the debugger, IDE and SDK from the url:https://occ.t-head.cn/community/download?id=575997419775328256

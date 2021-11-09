@@ -29,8 +29,8 @@ OBJECTS = $(SSRC:%.S=%.o) $(sSRC:%.s=%.o) $(CSRC:%.c=%.o)
 
 #INCDIR = -I/tools/cskytools/csky-abiv2-elf-tools-x86_64-20130312/csky-abiv2-elf/include -I.
 
-FLAG_ABI = 
-FLAG_MARCH = -mtune=c906 
+FLAG_ABI =
+FLAG_MARCH = -mtune=c906
 #CPU_ARCH_FLAG_0 => CPU Arch: c906, c906fd, c906fdv
 ifeq (${CPU_ARCH_FLAG_0}, c906)
   FLAG_MARCH += -march=rv64imacxtheadc
@@ -44,7 +44,7 @@ else
     FLAG_ABI   = -mabi=lp64dv
   endif
 endif
-CFLAGS = ${FLAG_MARCH} ${FLAG_ABI} 
+CFLAGS = ${FLAG_MARCH} ${FLAG_ABI}
 
 ifeq (${CASENAME}, coremark)
   CFLAGS +=  -c -O3 -mtune=c906 -static -funroll-all-loops -finline-limit=500 -fgcse-sm -fno-schedule-insns --param max-rtl-if-conversion-unpredictable-cost=100 -msignedness-cmpiv -fno-code-hoisting -mno-thread-jumps1 -mno-iv-adjust-addr-cost -mno-expand-split-imm -DITERATIONS=10000
@@ -74,7 +74,7 @@ HEXFLAGS	= -O srec
 	${CC} -c ${CFLAGS} -o $@ $<
 
 ${FILE}.elf : ${OBJECTS} linker.lcf
-	${CC} ${LINKFLAGS} ${LINKLIBS} ${OBJECTS} -o $@ -lm 
+	${CC} ${LINKFLAGS} ${LINKLIBS} ${OBJECTS} -o $@ -lm
 
 ${FILE}.obj : ${FILE}.elf
 	${OBJDUMP} ${OBJDUMPFLAGS} $< > $@
@@ -86,7 +86,7 @@ FILE_HEX = ${FILE}.hex
 ${FILE}.hex : ${FILE}.elf
 	${OBJCOPY} ${HEXFLAGS} $< ${INST_HEX} -j .text*  -j .rodata* -j .eh_frame*
 	${OBJCOPY} ${HEXFLAGS} $< ${DATA_HEX} -j .data*  -j .bss -j .COMMON
-	${OBJCOPY} ${HEXFLAGS} $< $@ 
+	${OBJCOPY} ${HEXFLAGS} $< $@
 
 INST_PAT = inst.pat
 DATA_PAT = data.pat
@@ -106,7 +106,6 @@ all : ${FILE}.pat ${FILE}.hex ${FILE}.elf ${FILE}.obj
 
 #---------------------------------------------------------------------
 # clean some medium code and .pat
-.PHONY :clean 
+.PHONY :clean
 clean:
 	rm -rf *.o *.pat *.elf *.obj *.hex
-
