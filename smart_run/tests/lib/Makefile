@@ -60,7 +60,9 @@ LINKFLAGS = -Tlinker.lcf -nostartfiles ${FLAG_MARCH} ${FLAG_ABI}
 
 LINKLIBS = -lc -lgcc
 
-OBJDUMPFLAGS = -S -Mnumeric
+# Original flag
+# OBJDUMPFLAGS = -S -Mnumeric
+OBJDUMPFLAGS = -xD
 
 HEXFLAGS	= -O srec
 
@@ -76,7 +78,7 @@ HEXFLAGS	= -O srec
 ${FILE}.elf : ${OBJECTS} linker.lcf
 	${CC} ${LINKFLAGS} ${LINKLIBS} ${OBJECTS} -o $@ -lm
 
-${FILE}.obj : ${FILE}.elf
+${FILE}.dump : ${FILE}.elf
 	${OBJDUMP} ${OBJDUMPFLAGS} $< > $@
 
 INST_HEX = ${FILE}_inst.hex
@@ -102,10 +104,10 @@ FILE_PAT = case.pat
 #--------------------------------------------------------------------
 # target setting
 .PHONY :all
-all : ${FILE}.pat ${FILE}.hex ${FILE}.elf ${FILE}.obj
+all : ${FILE}.pat ${FILE}.hex ${FILE}.elf ${FILE}.dump
 
 #---------------------------------------------------------------------
 # clean some medium code and .pat
 .PHONY :clean
 clean:
-	rm -rf *.o *.pat *.elf *.obj *.hex
+	rm -rf *.o *.pat *.elf *.dump *.hex
