@@ -15,27 +15,32 @@
 |--doc/           ##the user and integration manual of C906
 ```
 
-## Usage
+## Usage (ETH)
 
-  Step1: Get Started
+To get started run the following commands
+
 ```
-$ cd C906_RTL_FACTORY
-$ source setup/setup.csh
-$ cd ../smart_run
+$ source env.sh
+$ cd smart_run
+# To gain more information about how to use smart testbench.
 $ make help
-To gain more information about how to use smart testbench.
-```    
+# You should use vcs for a seamless experience
+# this runs hell world
+$ vcs-2020.03 make runcase CASE=hello_world SIM=vcs
+```
 
-  Step2: Download and install C/C++ Compiler
+If you want to dump a VCD and analyze the waveforms with
+QuestaSim, use this command instead:
 
 ```
-You can download the GNU tool chain compiled by T-HEAD from the url below:
-https://occ.t-head.cn/community/download?id=3948120165480468480
-$ cd ./smart_run
-GNU tool chain (specific riscv version) must be installed and specified before
-compiling *.c/*.v tests of the smart environment. Please refer to the following
-setup file about how to specify it: 
-    ./smart_run/setup/example_setup.csh
+$ vcs-2020.03 make runcase CASE=hello_world SIM=vcs DUMP=on WAVES=on
+```
+
+
+(Optional) You can get the source code for the toolchain here:
+
+```
+https://github.com/T-head-Semi/xuantie-gnu-toolchain
 ```
 
 ## Notes
