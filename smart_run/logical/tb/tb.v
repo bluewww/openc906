@@ -27,6 +27,9 @@ limitations under the License.
 `define CLK_PERIOD          10
 `define TCLK_PERIOD         40
 `define MAX_RUN_TIME        700000000
+// Dump starting from this hierarchy level. If the VCD is too big,
+// reduce the numbers of dumped elements
+`define DUMP_TOP_HIERARCHY tb.x_soc
 
 `define SOC_TOP             tb.x_soc
 `define RTL_MEM             tb.x_soc.x_axi_slave128.x_f_spsram_524288x128_L
@@ -313,18 +316,9 @@ end
 `ifndef NO_DUMP
 initial
 begin
-`ifdef NC_SIM
+  $display("######time:%d, Dump start######",$time);
   $dumpfile("test.vcd");
-  $dumpvars;
-`else
-   `ifdef IVERILOG_SIM
-     $dumpfile("test.vcd");
-     $dumpvars;
-   `else
-     $display("######time:%d, Dump start######",$time);
-     $fsdbDumpvars();
-   `endif
-`endif
+  $dumpvars(0, `DUMP_TOP_HIERARCHY);
 end
 `endif
 
